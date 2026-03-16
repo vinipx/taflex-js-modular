@@ -17,7 +17,11 @@ export const test = base.extend({
     // Adopt Playwright page/request if applicable for Playwright-native drivers
     if (mode === 'web' && typeof driver.adoptPage === 'function') {
       await driver.adoptPage(page);
-    } else if (mode === 'api' && provider === 'playwright' && typeof driver.adoptRequest === 'function') {
+    } else if (
+      mode === 'api' &&
+      provider === 'playwright' &&
+      typeof driver.adoptRequest === 'function'
+    ) {
       await driver.adoptRequest(request);
     } else {
       // For mobile or other API strategies (like Axios), use standard initialize
