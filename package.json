@@ -1,0 +1,27 @@
+{
+  "name": "taflex-js-modular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinipx/taflex-js-modular.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinipx/taflex-js-modular/issues"
+  },
+  "homepage": "https://github.com/vinipx/taflex-js-modular#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": "true",
+  "devDependencies": {
+    "vitest": "^4.1.0"
+  }
+}
