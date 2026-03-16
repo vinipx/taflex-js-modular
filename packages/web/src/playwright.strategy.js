@@ -21,6 +21,18 @@ export class PlaywrightDriverStrategy extends UiDriver {
   }
 
   /**
+   * Adopts an existing Playwright page object.
+   * Useful when running within the @playwright/test runner.
+   * @param {import('@playwright/test').Page} page - The Playwright page to adopt.
+   */
+  async adoptPage(page) {
+    this.page = page;
+    this.context = page.context();
+    this.browser = this.context.browser();
+    locatorManager.load();
+  }
+
+  /**
    * Initializes the Playwright browser, context, and page.
    * Handles connection to cloud grids if configured.
    * @param {object} config - Configuration object from ConfigManager.

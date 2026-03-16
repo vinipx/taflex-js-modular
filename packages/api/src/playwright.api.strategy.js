@@ -16,6 +16,14 @@ export class PlaywrightApiStrategy extends ApiDriver {
   }
 
   /**
+   * Adopts an existing Playwright request object.
+   * @param {import('@playwright/test').APIRequestContext} request - The Playwright request context to adopt.
+   */
+  async adoptRequest(request) {
+    this.requestContext = request;
+  }
+
+  /**
    * Initializes the Playwright API request context.
    * @param {object} config - Configuration including apiBaseUrl.
    * @returns {Promise<import('@playwright/test').APIRequestContext>} The Playwright request context.
