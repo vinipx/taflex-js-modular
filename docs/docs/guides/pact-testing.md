@@ -42,7 +42,7 @@ Consumer tests define the expectations for how the provider should behave.
 Create a file in `tests/contract/consumer/user.spec.js`:
 
 ```javascript
-import { pactManager } from '../../../src/core/contracts/pact.manager.js';
+import { pactManager } from '@taflex/contracts';
 import axios from 'axios';
 
 describe('User API Contract', () => {

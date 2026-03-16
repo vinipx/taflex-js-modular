@@ -46,15 +46,15 @@ Create a file ending in `.axios.spec.js` in `tests/api/`. These tests use **Vite
 
 ```javascript
 import { describe, it, expect, beforeAll } from 'vitest';
-import { DriverFactory } from '../../src/core/drivers/driver.factory.js';
+import { DriverRegistry } from '@taflex/core';
 
 describe('Specialized API Strategy (Axios + Vitest)', () => {
     let driver;
 
     beforeAll(async () => {
-        // 1. Initialize driver with api mode
+        // 1. Initialize driver by requesting the api mode with the axios provider
         // Ensure API_PROVIDER=axios is set in .env
-        driver = DriverFactory.create('api', 'axios'); 
+        driver = DriverRegistry.create('api', 'axios'); 
         await driver.initialize({
             apiBaseUrl: 'https://jsonplaceholder.typicode.com'
         });

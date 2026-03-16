@@ -302,18 +302,15 @@ function QuickStartSection() {
         </div>
         <div className={styles.codeBlock}>
           <pre>
-            <code>{`# Clone the repository
-git clone https://github.com/vinipx/taflex-js.git
-cd taflex-js
+            <code>{`# Scaffold your modular project
+bash <(curl -s https://raw.githubusercontent.com/vinipx/taflex-js-modular/main/scaffold.sh)
 
-# Install dependencies
+# Install tailored dependencies
+cd my-automation-project
 npm install
 
-# Run all tests
-npm test
-
-# Run unit tests
-npm run test:unit`}</code>
+# Run the test suite
+npm test`}</code>
           </pre>
         </div>
       </div>

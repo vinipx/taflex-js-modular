@@ -10,7 +10,11 @@ const sidebars = {
       type: "category",
       label: "Getting Started",
       collapsed: false,
-      items: ["getting-started/quickstart"],
+      items: [
+        "getting-started/quickstart",
+        "getting-started/scaffolding",
+        "getting-started/configuration"
+      ],
     },
     {
       type: "category",

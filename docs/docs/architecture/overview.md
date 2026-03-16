@@ -3,88 +3,98 @@ sidebar_position: 1
 title: Architecture Overview
 ---
 
-# Architecture Overview
+# Enterprise Architecture Overview
 
-TAFLEX JS is built on a robust, extensible architecture that follows enterprise-grade design patterns. This document explains the architectural decisions and how different components interact.
+TAFLEX JS is an enterprise-grade test automation framework engineered for scale, maintainability, and rapid onboarding. Built on modern JavaScript (ESM) and adhering to strict software design patterns, it serves as the foundational quality layer for teams testing Web, API, Mobile, and Microservices ecosystems.
 
-## Design Philosophy
+## The Modular Approach (Monorepo)
 
-TAFLEX JS follows these core principles:
+The defining characteristic of TAFLEX JS is its **Strict Plugin Architecture**. Instead of a monolithic framework that forces teams to download dependencies for tools they don't use (like downloading Appium when you only need API testing), the framework is split into isolated packages within a Monorepo.
 
-| Principle | Description |
-|-----------|-------------|
-| **🧩 Strategy Pattern** | Runtime driver resolution allows the same test code to run on Web, API, or Mobile without modification. |
-| **📄 Separation of Concerns** | Test logic is completely decoupled from driver implementation and locator definitions. |
-| **⚙️ Configuration Over Code** | Behavior is controlled through external configuration, not hardcoded values. |
-| **🧪 Fast Feedback Loop** | High-performance execution using Playwright and Vitest for rapid development. |
+### The Packages Ecosystem
 
-## High-Level Architecture
+The repository is structured into distinct, purpose-built NPM packages:
+
+- **`@taflex/core`**: The engine of the framework. It contains the `DriverRegistry`, `LocatorManager`, `ConfigManager` (Zod), and the abstract base classes (`BaseDriver`, `UiDriver`, `ApiDriver`). **Every consumer project must install this.**
+- **`@taflex/web`**: The Web automation strategy, powered by Playwright.
+- **`@taflex/api`**: The Dual API strategy, providing both Playwright (hybrid) and Axios (specialized) drivers.
+- **`@taflex/mobile`**: The Mobile automation strategy, powered by WebdriverIO and Appium.
+- **`@taflex/database`**: Database managers for test data orchestration (PostgreSQL, MySQL).
+- **`@taflex/contracts`**: Consumer-driven contract testing integration powered by Pact.
+- **`@taflex/reporters`**: Enterprise reporting integrations for Xray (Jira), ReportPortal, and Allure.
+
+**Business Value:** Teams compose their framework dynamically. An API-only team installs `@taflex/core` and `@taflex/api`, keeping their CI/CD pipelines incredibly fast and lightweight.
+
+## Core Architectural Principles
+
+Our architecture is guided by four pillars that solve the common pain points of large-scale test automation:
+
+| Principle | Implementation | Business Value |
+|-----------|----------------|----------------|
+| **📦 Strict Modularity** | Delivered as isolated npm workspaces (`@taflex/core`, `@taflex/web`, etc.). | Teams only install and load the dependencies they need, keeping pipelines lean and fast. |
+| **🧩 Strategy Pattern** | A unified `AutomationDriver` interface resolves to specific engine implementations at runtime (Playwright, WDIO, Axios) via the `DriverRegistry`. | Test logic is fully decoupled from the underlying tools. Write once, run anywhere. |
+| **📄 Externalized Locators** | Selectors are abstracted into a hierarchical JSON system (Page > Mode > Global). | QA Engineers can update locators without touching code; AI Agents can easily parse them. |
+| **🛡️ Type-Safe Configuration** | Composed **Zod** schemas validate environment variables at startup. | Fail-fast execution: prevents tests from running with missing or invalid credentials. |
+
+## System Context Diagram
+
+The following diagram illustrates how consumer projects compose the framework dynamically at runtime:
 
 ```mermaid
 flowchart TB
-    subgraph "Test Layer"
-        TC[Test Specs]
-        BDD[BDD Features]
-        FIX[Fixtures]
+    subgraph Consumer["Consumer Bounded Context (Your Project)"]
+        TC["Test Specs & BDD Features"]
+        SETUP["taflex.setup.js (Composition Root)"]
+        ENV[".env Configuration"]
     end
 
-    subgraph "Framework Core"
-        DF[DriverFactory]
-        LM[LocatorManager]
-        CM[ConfigManager]
-        DB[DatabaseManager]
+    subgraph Core["Core Framework (@taflex/core)"]
+        DR["DriverRegistry (Strategy Resolver)"]
+        LM["LocatorManager (Hierarchical Cache)"]
+        CM["ConfigManager (Zod Validator)"]
+        BDS["BaseDriver (Abstract Interface)"]
     end
 
-    subgraph "Driver Strategies"
-        direction TB
-        BDS[BaseDriver<br/>Abstract Class]
-        UID[UiDriver<br/>Abstract Class]
-        APID[ApiDriver<br/>Abstract Class]
-        PDS[PlaywrightStrategy]
-        APIS[PlaywrightApiStrategy]
-        AXS[AxiosApiStrategy]
-        MDS[WebdriverioMobileStrategy]
+    subgraph Plugins["Pluggable Strategies (Opt-in Modules)"]
+        WEB["@taflex/web (Playwright)"]
+        API["@taflex/api (Axios & Hybrid)"]
+        MOB["@taflex/mobile (WebdriverIO)"]
+        DB["@taflex/database (PG & MySQL)"]
+        CON["@taflex/contracts (Pact)"]
+        REP["@taflex/reporters (Xray & RP)"]
     end
 
-    subgraph "Element Wrappers"
-        PE[PlaywrightElement]
-        ME[MobileElement]
-    end
+    TC --> SETUP
+    ENV --> CM
+    SETUP --> CM
+    SETUP --> DR
+    
+    DR -.-> WEB
+    DR -.-> API
+    DR -.-> MOB
 
-    subgraph "External Resources"
-        JSON[JSON Locators]
-        DATA[Test Data]
-        ALR[Allure Reports]
-    end
+    CM -.-> WEB
+    CM -.-> API
+    CM -.-> MOB
+    CM -.-> DB
+    CM -.-> REP
+    CM -.-> CON
 
-    TC --> FIX
-    BDD --> FIX
-    FIX --> DF
-    FIX --> CM
+    WEB -.-> BDS
+    API -.-> BDS
+    MOB -.-> BDS
 
-    DF --> BDS
-    BDS --> UID
-    BDS --> APID
-    UID --> PDS
-    UID --> MDS
-    APID --> APIS
-    APID --> AXS
-
-    PDS --> PE
-    MDS --> ME
-
-    UID --> LM
-    LM --> JSON
-
-    TC --> DB
-    DB --> DATA
+    WEB --> LM
+    MOB --> LM
 ```
 
-## Component Breakdown
+## Deep Dive: Key Subsystems
 
-### 1. Driver Layer
+### 1. The Composition Root (`taflex.setup.js`)
+Because of the modular architecture, TAFLEX JS uses a Composition Root pattern. When a new team scaffolds a project, a `taflex.setup.js` file is generated. This file acts as the central registry where the project dictates *which* modules and schemas it requires to function. This ensures that the core engine only attempts to load what is explicitly registered.
 
-The Driver Layer implements the **Strategy Pattern**, allowing runtime selection of the appropriate driver implementation.
+### 2. Driver Layer (Strategy Pattern)
+The core of the framework is the `DriverRegistry`. Test scripts never interact directly with Playwright or WebdriverIO. Instead, they interact with the unified `BaseDriver` interface (extended by `UiDriver` and `ApiDriver`).
 
 ```mermaid
 classDiagram
@@ -92,147 +102,44 @@ classDiagram
         <<abstract>>
         +initialize(config)
         +terminate()
-        +getExecutionMode()
-        +setReporterContext(context)
     }
-
     class UiDriver {
         <<abstract>>
-        +navigateTo(String)
-        +findElement(String)
-        +loadLocators(String)
-        +captureScreenshot(String)
+        +navigateTo(url)
+        +findElement(locator)
+        +loadLocators(page)
     }
-
-    class ApiDriver {
-        <<abstract>>
-        +get(String, Object)
-        +post(String, Object)
-        +put(String, Object)
-        +delete(String, Object)
-    }
-
     class PlaywrightStrategy {
-        -browser
-        -context
-        -page
-        +initialize(config)
+        +initialize()
     }
-
-    class PlaywrightApiStrategy {
-        -requestContext
-        +initialize(config)
-    }
-
     class WebdriverioMobileStrategy {
-        -client
-        +initialize(config)
-    }
-
-    class AxiosApiStrategy {
-        -client
-        +initialize(config)
+        +initialize()
     }
 
     BaseDriver <|-- UiDriver
-    BaseDriver <|-- ApiDriver
     UiDriver <|-- PlaywrightStrategy
     UiDriver <|-- WebdriverioMobileStrategy
-    ApiDriver <|-- PlaywrightApiStrategy
-    ApiDriver <|-- AxiosApiStrategy
 ```
+**Advantage:** If the industry shifts to a new tool tomorrow, we simply write a new strategy adapter in a new package (e.g., `@taflex/cypress`). Your thousands of test specs remain untouched because they code against the `UiDriver` interface, not the engine itself.
 
-**Key Benefits:**
-- ✅ Single test codebase for all platforms.
-- ✅ Driver changes (e.g., swapping engines) don't affect test specs.
-- ✅ Supports parallel execution with different strategies.
+### 3. Zod-Powered Configuration Validation
+As frameworks scale, configuration drift is a major cause of flaky CI pipelines. TAFLEX JS utilizes **Zod** to enforce strict runtime boundaries. Each module (`@taflex/web`, `@taflex/api`) exports its own Zod schema (e.g., `WebConfigSchema`). The `configManager` merges these schemas (based on what was registered in the Composition Root) and validates the `.env` file before a single test executes. If a variable is missing or incorrectly typed, the execution fails fast before spinning up any expensive infrastructure.
 
-### 2. Locator System
+### 4. Smart Locator Management
+Selectors are notorious for causing maintenance overhead. Our `LocatorManager` loads JSON files in a strict fallback hierarchy, merging them at runtime:
+1. `global.json` (Shared components like Headers/Footers)
+2. `{mode}/common.json` (Mode-specific, e.g., web/common.json)
+3. `{mode}/{page}.json` (Highly specific to a feature)
 
-All locators are externalized in JSON files using the **LocatorManager**.
+This structure ensures maximum reusability. When a test calls `driver.findElement('login_btn')`, the `LocatorManager` resolves the physical selector (e.g., `button[type="submit"]`) from the cached JSON, keeping the test code completely decoupled from DOM structure.
 
-```mermaid
-sequenceDiagram
-    participant Test as Test Spec
-    participant LM as LocatorManager
-    participant File as JSON Files
+## AI-Native Capabilities
 
-    Test->>LM: load("login")
-    LM->>File: Read global.json
-    File-->>LM: Global locators
-    LM->>File: Read web/common.json
-    File-->>LM: Web locators
-    LM->>File: Read web/login.json
-    File-->>LM: Page locators
-    LM-->>Test: Merged Locator Cache Ready
+TAFLEX JS is future-proofed with a built-in **Model Context Protocol (MCP)** server. This architectural choice exposes the framework's state, configuration, and locators directly to AI Agents (like Claude Desktop or IDE assistants).
 
-    Test->>Test: findElement("username_field")
-    Test->>LM: resolve("username_field")
-    LM-->>Test: "#login-user"
-```
+Agents can:
+- **Discover:** Read the locator hierarchy and suggest fixes for broken tests.
+- **Execute:** Trigger specific specs to validate changes.
+- **Analyze:** Parse the standard JSON reports to provide natural language failure summaries.
 
-**Locator Loading Order:**
-
-1. `global.json` - Common across all modes.
-2. `{mode}/common.json` - Mode-specific common locators.
-3. `{mode}/{page}.json` - Page/feature-specific locators.
-
-### 3. Configuration Management
-
-The **ConfigManager** provides centralized access to validated environment variables:
-
-```javascript
-import { configManager } from './config/config.manager.js';
-
-// Type-safe access with Zod validation
-const browser = configManager.get('BROWSER');
-const timeout = configManager.get('TIMEOUT');
-```
-
-### 4. Test Execution Flow
-
-```mermaid
-sequenceDiagram
-    participant Suite as Test Runner
-    participant FIX as Fixture
-    participant Driver as Strategy
-    participant Test as Spec
-
-    Suite->>FIX: Setup Context
-    FIX->>Driver: DriverFactory.create()
-    Driver->>Driver: initialize(config)
-    Driver-->>FIX: AutomationDriver
-
-    FIX->>Test: Execute test(driver)
-    Test->>Driver: navigateTo(), findElement()
-    Driver->>Driver: Execute actions
-
-    FIX->>Driver: terminate()
-    Suite->>Suite: Finalize Reports
-```
-
-## Technology Stack
-
-| Category | Technologies |
-|----------|-------------|
-| **Core Framework** | Node.js (ESM), Zod, Dotenv |
-| **Web Testing** | Playwright, Chromium/Firefox/WebKit |
-| **BDD Testing** | Gherkin, playwright-bdd |
-| **API Testing** | Playwright (Hybrid) · Axios (Specialized) |
-| **Mobile Testing** | WebdriverIO, Appium |
-| **Unit Testing** | Vitest |
-| **Database** | pg (Postgres), mysql2 (MySQL) |
-| **Reporting** | Allure, Playwright HTML |
-
-## Extensibility Points
-
-TAFLEX JS is designed for extension at multiple levels:
-
-### 1. Custom Driver Strategies
-Simply extend the `AutomationDriver` base class and register it in the `DriverFactory`.
-
-### 2. Custom Element Wrappers
-Extend or create new element wrappers to support unique platform interactions while maintaining a consistent API.
-
-### 3. Fixtures
-Customize Playwright fixtures in `tests/fixtures.js` to inject global setup/teardown logic or custom dependencies.
+For more details on integrating AI, refer to the [MCP Integration Guide](../guides/mcp-integration.md).

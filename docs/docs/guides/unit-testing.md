@@ -18,8 +18,8 @@ Verifies that environment variables are correctly validated using Zod and that d
 ### LocatorManager Tests
 Ensures that locators are correctly merged from Global, Mode, and Page-specific JSON files.
 
-### DriverFactory Tests
-Checks that the correct driver strategy (Web, API, or Mobile) is instantiated based on the execution mode.
+### DriverRegistry Tests
+Checks that the correct driver strategy (Web, API, or Mobile) is instantiated based on the execution mode and that custom strategies can be registered successfully.
 
 ### DatabaseManager Tests
 Mocks database drivers to verify that queries are correctly routed to PostgreSQL or MySQL connections.

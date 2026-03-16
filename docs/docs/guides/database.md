@@ -5,7 +5,7 @@ The `databaseManager` utility provides a unified way to interact with PostgreSQL
 ## Usage
 
 ```javascript
-import { databaseManager } from '../../src/core/utils/database.manager.js';
+import { databaseManager } from '@taflex/database';
 
 // Postgres
 await databaseManager.connectPostgres({

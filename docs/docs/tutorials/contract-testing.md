@@ -24,7 +24,7 @@ Create `tests/contract/consumer/profile.spec.js`:
 
 ```javascript
 import { describe, it, expect } from 'vitest';
-import { pactManager } from '../../../src/core/contracts/pact.manager.js';
+import { pactManager } from '@taflex/contracts';
 import axios from 'axios';
 
 describe('User Profile Contract', () => {

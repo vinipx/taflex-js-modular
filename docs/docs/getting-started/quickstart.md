@@ -3,92 +3,120 @@ sidebar_position: 1
 title: Quick Start
 ---
 
-# Quick Start Guide
+# 🚀 Quick Start & Onboarding
 
-Get up and running with TAFLEX JS in under 5 minutes.
+Welcome to TAFLEX JS! Our onboarding process is designed to get new teams up and running with a fully configured, production-ready framework in **under 2 minutes**. 
 
-## 1. Installation
-
-TAFLEX JS requires **Node.js 20** or higher. We provide an automated setup script that handles dependencies, browser installations, and initial configuration.
-
-```bash
-# Clone the repository
-git clone https://github.com/vinipx/taflex-js.git
-cd taflex-js
-
-# Run the automated setup
-./setup.sh
-```
-
-The script will:
-- Install all NPM dependencies.
-- Install Playwright browsers and system dependencies.
-- Create an initial `.env` file from the example.
-
-## 2. Configuration
-
-The `setup.sh` script automatically creates your `.env` file. If you are performing a manual installation, you will need to create it:
-
-```bash
-# Only if you didn't run setup.sh
-cp .env.example .env
-```
-
-Now, edit the `.env` file to match your environment:
-
-```env
-EXECUTION_MODE=web
-BROWSER=chromium
-HEADLESS=true
-BASE_URL=https://www.google.com
-API_BASE_URL=https://jsonplaceholder.typicode.com
-
-# Reporting configuration
-REPORTERS=html,allure
-# REPORTERS=html,reportportal
-```
-
-## 3. Running Your First Test
-
-### Integration Tests (Web/API)
-Execute the Playwright test suite:
-
-```bash
-# Run all tests
-npm test
-
-# Run a specific spec
-npx playwright test tests/web/login.spec.js
-```
-
-### Unit Tests
-Verify the framework core components:
-
-```bash
-npm run test:unit
-```
-
-## 4. Visualizing Results
-
-After running tests, you can view the native Playwright report:
-
-```bash
-npx playwright show-report
-```
-
-For enterprise reporting, generate the Allure report:
-
-```bash
-npm install -g allure-commandline
-allure serve allure-results
-```
-
-To use **EPAM ReportPortal**, configure the `RP_*` variables in your `.env` and add `reportportal` to `REPORTERS`.
+Instead of cloning a monolithic repository full of tools you don't need, we utilize a smart interactive Scaffolder.
 
 ---
 
-## 🏗️ What's Next?
+## 1. Scaffold Your Modular Project
 
-- [Architecture Overview](../architecture/overview.md)
-- [How to manage Locators](../guides/locators.md)
-- [Database Integration](../guides/database.md)
+The scaffolding script acts as your setup wizard. It analyzes your team's needs and constructs a tailored bounded context.
+
+Open your terminal and execute:
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/vinipx/taflex-js-modular/main/scaffold.sh)
+```
+
+### The Interactive Wizard
+You will be guided through a series of choices:
+1. **Project Identity**: Define the path and name (e.g., `./ecommerce-checkout-tests`).
+2. **Platform Selection**: Select only the contexts you need (`Web`, `API`, `Mobile`).
+3. **Database Integration**: Opt-in to PostgreSQL/MySQL support for data setup.
+4. **Reporting Governance**: Choose your visibility stack (HTML, Allure, ReportPortal, Xray).
+
+---
+
+## 2. Install Your Tailored Dependencies
+
+Because TAFLEX JS uses a strict plugin architecture, your newly generated `package.json` only contains the modules you selected.
+
+Navigate to your new project and install:
+
+```bash
+cd your-project-name
+npm install
+```
+
+*Note: If you selected Web Testing, this step will also automatically download the necessary Playwright browser binaries.*
+
+---
+
+## 3. Configure Your Environment
+
+The Scaffolder automatically generates a `.env` file containing *exactly* the variables required by your chosen modules. TAFLEX JS uses strict runtime validation, so you must fill in these values.
+
+Open the `.env` file:
+
+```env
+# Core Execution
+EXECUTION_MODE=web
+BASE_URL=https://your-staging-environment.com
+
+# Web Module Config
+BROWSER=chromium
+HEADLESS=true
+TIMEOUT=30000
+
+# (Optional) API Module Config
+API_BASE_URL=https://api.your-staging-environment.com
+```
+
+---
+
+## 4. Understanding the Composition Root
+
+In your project root, you'll find `taflex.setup.js`. This is your **Composition Root**. It registers the specific strategies and schemas your project requires with the core framework.
+
+```javascript
+import { DriverRegistry, configManager } from '@taflex/core';
+import { PlaywrightStrategy, WebConfigSchema } from '@taflex/web';
+
+// 1. Register Configuration Schemas for Zod Validation
+configManager.registerSchema(WebConfigSchema);
+
+// 2. Register Platform Strategies
+DriverRegistry.register('web', PlaywrightStrategy);
+```
+
+If your team's scope expands in the future (e.g., you start doing Mobile testing), you simply `npm install @taflex/mobile` and add it to this registry!
+
+---
+
+## 5. Write and Execute Your First Test
+
+You are now ready to write tests. Create a file in `tests/example.spec.js`:
+
+```javascript
+import { test, expect } from './fixtures.js';
+
+test('My First Unified Test', async ({ driver }) => {
+    // 1. Navigate
+    await driver.navigateTo('/');
+    
+    // 2. Load Locators
+    await driver.loadLocators('home');
+    
+    // 3. Interact using the unified Driver API
+    const title = await driver.findElement('main_heading');
+    expect(await title.isVisible()).toBeTruthy();
+});
+```
+
+Run the suite:
+```bash
+npm test
+```
+
+---
+
+## 🏗️ What's Next for the Team?
+
+To maximize the framework's potential, we recommend reviewing these architectural deep dives:
+
+- 🧠 **[Architecture Overview](../architecture/overview.md)** - Understand the Strategy Pattern.
+- 🎯 **[Locator Management](../guides/locators.md)** - Learn how to build highly reusable JSON selectors.
+- 🤝 **[Contract Testing](../guides/pact-testing.md)** - Shift-left your API testing with Consumer-Driven Contracts.

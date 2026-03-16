@@ -6,154 +6,105 @@ title: Introduction
 
 # TAFLEX JS
 
-**Enterprise Test Automation Framework**
+**The Modular Enterprise Test Automation Framework**
 
-[![Build Status](https://github.com/vinipx/taflex-js/actions/workflows/js-ci.yml/badge.svg?branch=main)](https://github.com/vinipx/taflex-js/actions)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/vinipx/taflex-js/releases)
+[![Build Status](https://github.com/vinipx/taflex-js-modular/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vinipx/taflex-js-modular/actions)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/vinipx/taflex-js-modular/releases)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org)
 
 ---
 
-## 🎯 What is TAFLEX JS?
+## 🎯 Reimagining Test Automation for the Enterprise
 
-TAFLEX JS is a **unified, enterprise-grade test automation framework** designed for testing Web, API, and Mobile applications using a single codebase. Migrated from the original Java-based architecture, it leverages modern Node.js (ESM), Playwright, and WebdriverIO to deliver fast, reliable, and maintainable automation.
+TAFLEX JS is a **world-class, modular test automation framework** designed to unify your quality engineering efforts across Web, API, and Mobile domains. Built in modern JavaScript (Node.js ESM), it solves the classic problems of monolithic frameworks through a strict **Plugin Architecture**, the **Strategy Design Pattern**, and **Runtime Configuration Validation**.
 
-### ✨ Key Highlights
+It is designed not just for writing tests, but for **managing quality at scale** across multiple autonomous teams.
 
-| Feature | Description |
-|---------|-------------|
-| 🚀 **Quick Setup** | Modern npm-based workflow with automated setup and comprehensive guides. |
-| 🧩 **Strategy Pattern** | Runtime driver resolution between platforms. Native BDD support via Gherkin. |
-| 📄 **Hierarchical Locators** | All selectors stored in JSON files with Page > Mode > Global inheritance model. |
-| 🛡️ **Type-Safe Config** | Environment variables are strictly validated at runtime using **Zod**. |
-| 🗄️ **Database Integration** | Native support for PostgreSQL and MySQL query orchestration. |
-| 📊 **Modern Reporting** | Integrated Allure reports and Playwright's native HTML reporter. |
+### ✨ Enterprise Capabilities
+
+| Feature | Architectural Benefit |
+|---------|-----------------------|
+| 🚀 **Interactive Scaffolding** | Instantly generate tailored bounded contexts for new teams. No more cloning bloated starter repos. |
+| 🧩 **Strategy Pattern Engine** | A unified `AutomationDriver` interface seamlessly routes commands to Playwright, WebdriverIO, or Axios at runtime. |
+| 📄 **Hierarchical Locators** | 100% decoupling of selectors from test code using a Global > Mode > Page JSON inheritance model. |
+| 🛡️ **Type-Safe Boundaries** | Composed **Zod** schemas guarantee that environment configurations are valid before execution begins, ensuring fail-fast CI/CD pipelines. |
+| 🤖 **AI-Agent Ready (MCP)** | Native Model Context Protocol server. Transform your test suite into an active tool that AI assistants can debug and execute autonomously. |
+| 📊 **Governance & Traceability**| Native integrations with Allure, ReportPortal, and Jira (Xray) for complete requirement traceability and executive visibility. |
 
 ---
 
-## 🚀 Quick Start
+## 🚀 The "Day 1" Onboarding Experience
 
-Get up and running in 3 simple steps:
+Get a production-ready, highly customized framework up and running in your terminal in under 60 seconds. 
 
-### 1. Clone and Setup
+### 1. Scaffold
+Launch the interactive builder to select exactly the modules your team needs (Web, API, Mobile, Database, Reporting):
 
 ```bash
-# Clone the repository
-git clone https://github.com/vinipx/taflex-js.git
-cd taflex-js
-
-# Run the automated setup
-./setup.sh
+bash <(curl -s https://raw.githubusercontent.com/vinipx/taflex-js-modular/main/scaffold.sh)
 ```
 
-### 2. Configure Environment
-
-The `setup.sh` script creates a `.env` file for you. Simply update it with your settings:
+### 2. Install & Configure
+Install your tailored dependencies and fill in the strictly-typed `.env` file generated for you:
 
 ```bash
-# Update with your specific credentials
-nano .env
+cd my-new-automation-project
+npm install
 ```
 
-### 3. Run Your First Test
+### 3. Execute
+Start writing business-focused tests immediately using the unified `driver` API:
 
 ```bash
-# Run all tests
 npm test
-
-# Run unit tests
-npm run test:unit
 ```
 
 ---
 
-## 🏗️ Architecture Overview
+## 💻 The Unified API Experience
 
-```mermaid
-flowchart TB
-    subgraph "Test Layer"
-        T[Test & BDD Specs]
-    end
-
-    subgraph "Framework Core"
-        F[DriverFactory]
-        L[LocatorManager]
-        C[ConfigManager]
-    end
-
-    subgraph "Driver Strategies"
-        W[Web Driver<br/>Playwright]
-        A[API Driver<br/>Playwright / Axios]
-        M[Mobile Driver<br/>WDIO]
-    end
-
-    subgraph "External Resources"
-        P[JSON Locators]
-        D[Test Data]
-        R[Allure Reports]
-    end
-
-    T --> F
-    T --> L
-    F --> W
-    F --> A
-    F --> M
-    L --> P
-    W --> D
-    A --> D
-    M --> D
-    T --> R
-```
-
----
-
-## 💻 Code Example
-
-### Web Test
+Regardless of whether you are testing a Web app with Playwright, a Mobile app with Appium, or an API with Axios, the test syntax remains beautifully consistent.
 
 ```javascript
 import { test, expect } from '../fixtures.js';
 
-test('should login successfully', async ({ driver }) => {
-    // Navigate using unified driver
-    await driver.navigateTo('https://the-internet.herokuapp.com/login');
+test('Unified Cross-Platform Strategy', async ({ driver }) => {
+    // 1. Unified Navigation
+    await driver.navigateTo('/login');
     
-    // Load page-specific locators
+    // 2. Intelligent JSON Locator Loading
     await driver.loadLocators('login');
 
-    // Use platform-agnostic element API
-    await (await driver.findElement('username_field')).fill('tomsmith');
-    await (await driver.findElement('password_field')).fill('SuperSecretPassword!');
+    // 3. Platform-Agnostic Element Interactions
+    await (await driver.findElement('username_field')).fill('automation_user');
+    await (await driver.findElement('password_field')).fill('SecurePass123!');
     await (await driver.findElement('login_button')).click();
 
-    // Fluent assertions
-    const flashMessage = await driver.findElement('flash_message');
-    expect(await flashMessage.getText()).toContain('You logged into a secure area!');
+    // 4. Fluent Assertions
+    const dashboard = await driver.findElement('dashboard_container');
+    expect(await dashboard.isVisible()).toBeTruthy();
 });
 ```
 
 ---
 
-## 🎯 Who Should Use TAFLEX JS?
+## 🎯 Who Benefits from TAFLEX JS?
 
-| Role | Benefits |
-|------|----------|
-| **QA Engineers & Testers** | Low-code locator management · High-level unified API · Automatic retries & screenshots · Beautiful reports. |
-| **Developers** | Modern ESM codebase · Strategy pattern extensibility · Zod validation · Fast Vitest suite. |
-| **Managers** | Unified stack for Web/API/Mobile · Reduced tech debt · Detailed dashboards · High execution ROI. |
-| **DevOps Engineers** | Docker-ready · Seamless GitHub Actions integration · Parallel execution by default. |
+TAFLEX JS is built to satisfy the needs of every stakeholder in the software development lifecycle:
 
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](./contributing/guidelines.md) for details.
-
-## 📄 License
-
-TAFLEX JS is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+- 👨‍💻 **Automation Architects:** Clean SOLID principles, Composition Roots, and Zod boundaries provide a highly maintainable and extensible architecture.
+- 🕵️‍♀️ **QA Engineers:** Low-code JSON locator management, powerful unified APIs, and seamless BDD (Gherkin) integration for rapid test development.
+- 🚀 **DevOps Engineers:** Lean, modular dependencies mean faster Docker builds and lightweight CI pipelines. Zero "heavy browser" downloads for purely API-focused teams.
+- 📊 **Engineering Managers:** Unified reporting (ReportPortal/Xray) across all platforms brings unprecedented visibility into product quality and team velocity.
 
 ---
 
-**Happy Testing! 🚀**
+## 📚 Deep Dive
+
+Ready to master the framework? 
+- [Explore the Architecture](./architecture/overview.md)
+- [Follow the Quick Start Guide](./getting-started/quickstart.md)
+- [Discover AI-Agent (MCP) Integration](./guides/mcp-integration.md)
+
+---
+*TAFLEX JS is open-source software licensed under the MIT License.*

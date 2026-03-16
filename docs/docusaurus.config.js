@@ -8,10 +8,10 @@ const config = {
   favicon: 'img/logo.svg',
 
   url: process.env.DOCS_URL || 'https://vinipx.github.io',
-  baseUrl: process.env.DOCS_BASE_URL || '/taflex-js/',
+  baseUrl: process.env.DOCS_BASE_URL || '/taflex-js-modular/',
 
   organizationName: 'vinipx',
-  projectName: 'taflex-js',
+  projectName: 'taflex-js-modular',
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
@@ -37,7 +37,7 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          editUrl: 'https://github.com/vinipx/taflex-js/tree/main/docs/',
+          editUrl: 'https://github.com/vinipx/taflex-js-modular/tree/main/docs/',
           showLastUpdateTime: true,
         },
         blog: false,
@@ -73,7 +73,7 @@ const config = {
       announcementBar: {
         id: "taflex_js_v1",
         content:
-          '⚡ TAFLEX JS — Unified Enterprise Test Automation for Web, API & Mobile. <a target="_blank" rel="noopener noreferrer" href="https://github.com/vinipx/taflex-js">Star us on GitHub</a>',
+          '⚡ TAFLEX JS — Modular Enterprise Test Automation for Web, API & Mobile. <a target="_blank" rel="noopener noreferrer" href="https://github.com/vinipx/taflex-js-modular">Star us on GitHub</a>',
         backgroundColor: "#111111",
         textColor: "#d4d4d8",
         isCloseable: true,
@@ -102,9 +102,14 @@ const config = {
             label: 'Documentation',
           },
           {
-            to: "/docs/getting-started/quickstart",
+            type: "dropdown",
             label: "Getting Started",
             position: "left",
+            items: [
+              { label: "Quick Start", to: "/docs/getting-started/quickstart" },
+              { label: "Interactive Scaffolder", to: "/docs/getting-started/scaffolding" },
+              { label: "Configuration (Zod)", to: "/docs/getting-started/configuration" },
+            ],
           },
           {
             to: "/docs/architecture/overview",
@@ -188,7 +193,7 @@ const config = {
             ],
           },
           {
-            href: 'https://github.com/vinipx/taflex-js',
+            href: 'https://github.com/vinipx/taflex-js-modular',
             label: 'GitHub',
             position: 'right',
           },
@@ -226,7 +231,7 @@ const config = {
           {
             title: 'Links',
             items: [
-              { label: 'GitHub', href: 'https://github.com/vinipx/taflex-js' },
+              { label: 'GitHub', href: 'https://github.com/vinipx/taflex-js-modular' },
               { label: 'Contributing', to: '/docs/contributing/guidelines' },
             ],
           },

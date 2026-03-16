@@ -5,17 +5,17 @@ This guide is for developers who want to extend TAFLEX JS or integrate it into t
 ## Extending the Framework
 
 ### Adding a New Strategy
-To add support for a new platform, create a new class extending `AutomationDriver` in `src/core/drivers/strategies/`.
+To add support for a new platform, create a new class extending `BaseDriver` from `@taflex/core`.
 
 ```javascript
-import { AutomationDriver } from '../automation.driver.js';
+import { BaseDriver } from '@taflex/core';
 
-export class MyNewStrategy extends AutomationDriver {
+export class MyNewStrategy extends BaseDriver {
     // Implement abstract methods
 }
 ```
 
-Then, register it in `src/core/drivers/driver.factory.js`.
+Then, register it in your project's `taflex.setup.js` file using the `DriverRegistry.register()` method.
 
 ## BDD Integration (Gherkin)
 
