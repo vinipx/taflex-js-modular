@@ -1,5 +1,5 @@
-import { xrayService } from '../utils/xray.service.js';
-import { configManager } from '../../config/config.manager.js';
+import { xrayService } from './xray.service.js';
+import { configManager } from '../../core/src/config/config.manager.js';
 
 /**
  * Custom Playwright reporter that exports test results to Jira Xray.

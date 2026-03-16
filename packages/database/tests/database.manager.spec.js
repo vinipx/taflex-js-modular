@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { databaseManager } from '../../src/core/utils/database.manager.js';
+import { databaseManager } from '../src/database.manager.js';
 
 vi.mock('pg', () => {
   class Pool {

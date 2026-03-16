@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { PactManager } from '../../src/core/contracts/pact.manager.js';
-import { configManager } from '../../src/config/config.manager.js';
+import { PactManager } from '../src/pact.manager.js';
+import { configManager } from '../../core/src/config/config.manager.js';
 
-vi.mock('../../src/config/config.manager.js', () => ({
+vi.mock('../../core/src/config/config.manager.js', () => ({
   configManager: {
     get: vi.fn(),
   },

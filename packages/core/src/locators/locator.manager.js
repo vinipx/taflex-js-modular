@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { configManager } from '../../config/config.manager.js';
+import { configManager } from '../config/config.manager.js';
 
 /**
  * Manages hierarchical locators using a cascading inheritance model:

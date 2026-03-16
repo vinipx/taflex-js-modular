@@ -1,8 +1,8 @@
 import { remote } from 'webdriverio';
-import { UiDriver } from '../ui.driver.js';
-import { locatorManager } from '../../locators/locator.manager.js';
-import { MobileElement } from '../../elements/mobile.element.js';
-import { CapabilityBuilder } from '../../utils/capability.builder.js';
+import { UiDriver } from '../../core/src/drivers/ui.driver.js';
+import { locatorManager } from '../../core/src/locators/locator.manager.js';
+import { MobileElement } from './mobile.element.js';
+import { CapabilityBuilder } from './capability.builder.js';
 
 /**
  * Mobile automation driver implementation using WebdriverIO (Appium).

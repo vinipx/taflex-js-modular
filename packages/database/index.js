@@ -1,2 +1,2 @@
-export * from './database.manager.js';
-export * from './schema.js';
+export * from './src/database.manager.js';
+export * from './src/schema.js';

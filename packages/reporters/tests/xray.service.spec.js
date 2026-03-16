@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import axios from 'axios';
-import { xrayService } from '../../src/core/utils/xray.service.js';
-import { configManager } from '../../src/config/config.manager.js';
+import { xrayService } from '../src/xray.service.js';
+import { configManager } from '../../core/src/config/config.manager.js';
 
 vi.mock('axios');
-vi.mock('../../src/config/config.manager.js', () => ({
+vi.mock('../../core/src/config/config.manager.js', () => ({
   configManager: {
     get: vi.fn(),
   },

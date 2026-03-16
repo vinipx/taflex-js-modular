@@ -21,8 +21,11 @@ describe('ConfigManager', () => {
   });
 
   it('should load default values when environment variables are missing', async () => {
-    const { ConfigManager } = await import('../../src/config/config.manager.js');
+    const { ConfigManager } = await import('../src/config/config.manager.js');
+    const { WebConfigSchema } = await import('../../web/src/schema.js');
     const config = new ConfigManager();
+    config.registerSchema(WebConfigSchema);
+    config.load();
 
     expect(config.get('EXECUTION_MODE')).toBe('web');
     expect(config.get('HEADLESS')).toBe(true);
@@ -34,8 +37,11 @@ describe('ConfigManager', () => {
     process.env.TIMEOUT = '5000';
     process.env.BASE_URL = 'https://example.com';
 
-    const { ConfigManager } = await import('../../src/config/config.manager.js');
+    const { ConfigManager } = await import('../src/config/config.manager.js');
+    const { WebConfigSchema } = await import('../../web/src/schema.js');
     const config = new ConfigManager();
+    config.registerSchema(WebConfigSchema);
+    config.load();
 
     expect(config.get('HEADLESS')).toBe(false);
     expect(config.get('TIMEOUT')).toBe(5000);
@@ -50,8 +56,11 @@ describe('ConfigManager', () => {
     process.env.OS = 'OS X';
     process.env.OS_VERSION = 'Ventura';
 
-    const { ConfigManager } = await import('../../src/config/config.manager.js');
+    const { ConfigManager } = await import('../src/config/config.manager.js');
+    const { WebConfigSchema } = await import('../../web/src/schema.js');
     const config = new ConfigManager();
+    config.registerSchema(WebConfigSchema);
+    config.load();
 
     expect(config.get('CLOUD_PLATFORM')).toBe('browserstack');
     expect(config.get('CLOUD_USER')).toBe('testuser');
@@ -64,10 +73,11 @@ describe('ConfigManager', () => {
   it('should throw error on invalid configuration', async () => {
     // First import with valid env to get the class
     process.env.EXECUTION_MODE = 'web';
-    const { ConfigManager } = await import('../../src/config/config.manager.js');
+    const { ConfigManager } = await import('../src/config/config.manager.js');
 
     // Then set invalid env and try to instantiate manually
     process.env.EXECUTION_MODE = 'invalid_mode';
-    expect(() => new ConfigManager()).toThrow('Invalid environment configuration');
+    const config = new ConfigManager();
+    expect(() => config.load()).toThrow('Invalid environment configuration');
   });
 });

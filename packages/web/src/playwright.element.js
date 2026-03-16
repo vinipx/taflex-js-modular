@@ -1,5 +1,5 @@
-import { logger } from '../utils/logger.js';
-import { AbstractElement } from './abstract.element.js';
+import { logger } from '../../core/src/utils/logger.js';
+import { AbstractElement } from '../../core/src/elements/abstract.element.js';
 
 /**
  * Playwright implementation of the unified element wrapper.

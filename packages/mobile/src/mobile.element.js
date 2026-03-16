@@ -1,4 +1,4 @@
-import { AbstractElement } from './abstract.element.js';
+import { AbstractElement } from '../../core/src/elements/abstract.element.js';
 
 /**
  * WebdriverIO implementation of the unified element wrapper for Mobile automation.

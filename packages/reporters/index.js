@@ -1,3 +1,3 @@
-export * from './xray.reporter.js';
-export * from './xray.service.js';
-export * from './schema.js';
+export * from './src/xray.reporter.js';
+export * from './src/xray.service.js';
+export * from './src/schema.js';

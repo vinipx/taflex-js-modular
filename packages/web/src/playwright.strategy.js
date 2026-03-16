@@ -1,9 +1,9 @@
 import { chromium, firefox, webkit } from '@playwright/test';
-import { UiDriver } from '../ui.driver.js';
-import { locatorManager } from '../../locators/locator.manager.js';
-import { PlaywrightElement } from '../../elements/playwright.element.js';
-import { CapabilityBuilder } from '../../utils/capability.builder.js';
-import { logger } from '../../utils/logger.js';
+import { UiDriver } from '../../core/src/drivers/ui.driver.js';
+import { locatorManager } from '../../core/src/locators/locator.manager.js';
+import { PlaywrightElement } from './playwright.element.js';
+import { CapabilityBuilder } from './capability.builder.js';
+import { logger } from '../../core/src/utils/logger.js';
 
 /**
  * Web automation driver implementation using Playwright.

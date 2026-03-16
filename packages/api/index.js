@@ -1,3 +1,3 @@
-export * from './axios.api.strategy.js';
-export * from './playwright.api.strategy.js';
-export * from './schema.js';
+export * from './src/axios.api.strategy.js';
+export * from './src/playwright.api.strategy.js';
+export * from './src/schema.js';

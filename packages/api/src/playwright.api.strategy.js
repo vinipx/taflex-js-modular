@@ -1,6 +1,6 @@
 import { request } from '@playwright/test';
-import { ApiDriver } from '../api.driver.js';
-import { logger } from '../../utils/logger.js';
+import { ApiDriver } from '../../core/src/drivers/api.driver.js';
+import { logger } from '../../core/src/utils/logger.js';
 
 /**
  * API automation driver implementation using Playwright's APIRequestContext.

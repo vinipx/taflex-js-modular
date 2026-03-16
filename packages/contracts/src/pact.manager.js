@@ -1,6 +1,6 @@
 import { PactV3 } from '@pact-foundation/pact';
 import path from 'path';
-import { configManager } from '../../config/config.manager.js';
+import { configManager } from '../../core/src/config/config.manager.js';
 
 /**
  * Manages Pact contract testing lifecycle and interactions.

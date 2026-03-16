@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CapabilityBuilder } from '../../src/core/utils/capability.builder.js';
+import { CapabilityBuilder } from '../src/capability.builder.js';
 
 describe('CapabilityBuilder', () => {
   describe('buildWebCapabilities', () => {

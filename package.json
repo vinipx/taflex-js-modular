@@ -25,6 +25,7 @@
   ],
   "private": "true",
   "devDependencies": {
+    "axios": "^1.6.0",
     "@eslint/js": "^10.0.1",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.1",

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import axios from 'axios';
-import { AxiosApiStrategy } from '../../src/core/drivers/strategies/axios.api.strategy.js';
+import { AxiosApiStrategy } from '../src/axios.api.strategy.js';
 
 vi.mock('axios');
 

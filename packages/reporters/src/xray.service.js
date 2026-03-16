@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { configManager } from '../../config/config.manager.js';
-import { logger } from './logger.js';
+import { configManager } from '../../core/src/config/config.manager.js';
+import { logger } from '../../core/src/utils/logger.js';
 
 /**
  * Service class for interacting with Jira Xray Cloud API.

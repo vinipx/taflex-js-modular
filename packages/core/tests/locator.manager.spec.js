@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import fs from 'fs';
-import { LocatorManager } from '../../src/core/locators/locator.manager.js';
+import { LocatorManager } from '../src/locators/locator.manager.js';
 
 vi.mock('fs');
-vi.mock('../../src/config/config.manager.js', () => ({
+vi.mock('../src/config/config.manager.js', () => ({
   configManager: {
     get: vi.fn().mockReturnValue('web'),
   },
