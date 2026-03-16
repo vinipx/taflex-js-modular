@@ -12,7 +12,7 @@ export class ApiDriver extends BaseDriver {
    * @returns {Promise<any>}
    * @abstract
    */
-  async get(endpoint, options = {}) {
+  async get(_endpoint, _options = {}) {
     throw new Error('get() must be implemented');
   }
 
@@ -24,7 +24,7 @@ export class ApiDriver extends BaseDriver {
    * @returns {Promise<any>}
    * @abstract
    */
-  async post(endpoint, data = {}, options = {}) {
+  async post(_endpoint, _data = {}, _options = {}) {
     throw new Error('post() must be implemented');
   }
 
@@ -36,7 +36,7 @@ export class ApiDriver extends BaseDriver {
    * @returns {Promise<any>}
    * @abstract
    */
-  async put(endpoint, data = {}, options = {}) {
+  async put(_endpoint, _data = {}, _options = {}) {
     throw new Error('put() must be implemented');
   }
 
@@ -47,7 +47,7 @@ export class ApiDriver extends BaseDriver {
    * @returns {Promise<any>}
    * @abstract
    */
-  async delete(endpoint, options = {}) {
+  async delete(_endpoint, _options = {}) {
     throw new Error('delete() must be implemented');
   }
 }

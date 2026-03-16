@@ -11,7 +11,7 @@ export class UiDriver extends BaseDriver {
    * @returns {Promise<void>}
    * @abstract
    */
-  async navigateTo(url) {
+  async navigateTo(_url) {
     throw new Error('navigateTo() must be implemented');
   }
 
@@ -21,7 +21,7 @@ export class UiDriver extends BaseDriver {
    * @returns {Promise<any>} A wrapped element instance.
    * @abstract
    */
-  async findElement(logicalName) {
+  async findElement(_logicalName) {
     throw new Error('findElement() must be implemented');
   }
 
@@ -31,7 +31,7 @@ export class UiDriver extends BaseDriver {
    * @returns {Promise<void>}
    * @abstract
    */
-  async loadLocators(pageName) {
+  async loadLocators(_pageName) {
     throw new Error('loadLocators() must be implemented');
   }
 
@@ -41,7 +41,7 @@ export class UiDriver extends BaseDriver {
    * @returns {Promise<any>} The captured screenshot.
    * @abstract
    */
-  async captureScreenshot(name) {
+  async captureScreenshot(_name) {
     throw new Error('captureScreenshot() must be implemented');
   }
 }

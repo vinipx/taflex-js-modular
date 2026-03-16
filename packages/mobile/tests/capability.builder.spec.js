@@ -12,7 +12,8 @@ describe('CapabilityBuilder', () => {
         cloudKey: 'key123',
         os: 'Windows',
         osVersion: '11',
-      };      const caps = CapabilityBuilder.buildWebCapabilities(config);
+      };
+      const caps = CapabilityBuilder.buildWebCapabilities(config);
       expect(caps.browserName).toBe('chromium');
       expect(caps['bstack:options'].userName).toBe('user123');
       expect(caps['bstack:options'].accessKey).toBe('key123');
@@ -44,7 +45,8 @@ describe('CapabilityBuilder', () => {
         cloudKey: 'key123',
         os: 'Android',
         osVersion: 'Google Pixel 7',
-      };      const wdioConfig = CapabilityBuilder.buildMobileConfig(config);
+      };
+      const wdioConfig = CapabilityBuilder.buildMobileConfig(config);
       expect(wdioConfig.user).toBe('user123');
       expect(wdioConfig.key).toBe('key123');
       expect(wdioConfig.capabilities.platformName).toBe('Android');

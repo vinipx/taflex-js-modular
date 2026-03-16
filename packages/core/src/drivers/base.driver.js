@@ -9,7 +9,7 @@ export class BaseDriver {
    * @returns {Promise<any>}
    * @abstract
    */
-  async initialize(config) {
+  async initialize(_config) {
     throw new Error('initialize() must be implemented');
   }
 

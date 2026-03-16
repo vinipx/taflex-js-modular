@@ -28,7 +28,7 @@ export class ConfigManager {
   load() {
     const finalSchema = mergeSchemas(...this.schemas);
     const result = finalSchema.safeParse(process.env);
-    
+
     if (!result.success) {
       console.error('❌ Invalid configuration:', result.error.format());
       throw new Error('Invalid environment configuration');

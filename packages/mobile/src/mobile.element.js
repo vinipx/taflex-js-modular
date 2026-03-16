@@ -45,7 +45,7 @@ export class MobileElement extends AbstractElement {
    * @param {string} key - The key to press (e.g., 'Enter').
    * @param {object} [options={}] - Press options.
    */
-  async press(key, options = {}) {
+  async press(key, _options = {}) {
     // In WebdriverIO, you can simulate key presses by using setValue or browser.keys
     // If the element is focused, browser.keys will act on it. Or you can send keys to element.
     await this.element.addValue(key);

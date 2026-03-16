@@ -1,6 +1,5 @@
 import { request } from '@playwright/test';
 import { ApiDriver } from '../api.driver.js';
-import { locatorManager } from '../../locators/locator.manager.js';
 import { logger } from '../../utils/logger.js';
 
 /**

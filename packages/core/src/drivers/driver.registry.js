@@ -28,12 +28,12 @@ export class DriverRegistry {
 
     // Fallback to default if specific provider not registered
     if (!Strategy && provider !== 'default') {
-        key = `${mode}:default`;
-        Strategy = this.strategies.get(key);
+      key = `${mode}:default`;
+      Strategy = this.strategies.get(key);
     }
 
     if (!Strategy) {
-        throw new Error(`Strategy for mode '${mode}' and provider '${provider}' is not registered.`);
+      throw new Error(`Strategy for mode '${mode}' and provider '${provider}' is not registered.`);
     }
 
     return new Strategy();

@@ -9,7 +9,7 @@ export class AbstractElement {
    * @param {object} [options={}] - Click options.
    * @abstract
    */
-  async click(options = {}) {
+  async click(_options = {}) {
     throw new Error('click() must be implemented');
   }
 
@@ -19,7 +19,7 @@ export class AbstractElement {
    * @param {object} [options={}] - Fill options.
    * @abstract
    */
-  async fill(value, options = {}) {
+  async fill(_value, _options = {}) {
     throw new Error('fill() must be implemented');
   }
 
@@ -29,7 +29,7 @@ export class AbstractElement {
    * @param {object} [options={}] - Type options.
    * @abstract
    */
-  async type(value, options = {}) {
+  async type(_value, _options = {}) {
     throw new Error('type() must be implemented');
   }
 
@@ -39,7 +39,7 @@ export class AbstractElement {
    * @param {object} [options={}] - Press options.
    * @abstract
    */
-  async press(key, options = {}) {
+  async press(_key, _options = {}) {
     throw new Error('press() must be implemented');
   }
 
@@ -84,7 +84,7 @@ export class AbstractElement {
    * @param {object} [options={}] - Wait options.
    * @abstract
    */
-  async waitFor(options = {}) {
+  async waitFor(_options = {}) {
     throw new Error('waitFor() must be implemented');
   }
 
@@ -94,7 +94,7 @@ export class AbstractElement {
    * @returns {Promise<string|null>}
    * @abstract
    */
-  async getAttribute(name) {
+  async getAttribute(_name) {
     throw new Error('getAttribute() must be implemented');
   }
 }
