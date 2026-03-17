@@ -44,14 +44,14 @@ TAFLEX JS leverages a **Strategy Pattern** within a Monorepo structure. This all
 
 ```mermaid
 graph TD
-    A[Consumer Project] --> B[@taflex/core]
+    A[Consumer Project] --> B["@taflex/core"]
     B --> C{Driver Registry}
-    C --> D[@taflex/web]
-    C --> E[@taflex/api]
-    C --> F[@taflex/mobile]
-    A --> G[@taflex/bdd]
-    A --> H[@taflex/reporters]
-    A --> I[@taflex/database]
+    C --> D["@taflex/web"]
+    C --> E["@taflex/api"]
+    C --> F["@taflex/mobile"]
+    A --> G["@taflex/bdd"]
+    A --> H["@taflex/reporters"]
+    A --> I["@taflex/database"]
 ```
 
 ### 📦 Available Packages
