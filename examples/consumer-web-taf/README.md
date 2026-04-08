@@ -1,7 +1,8 @@
 # Consumer Web TAF — TAFLEX Example
 
-Sample project demonstrating how to consume `@taflex/core` and `@taflex/web`
-packages from GitHub Packages.
+Sample project demonstrating how to consume `@taflex/web`
+from GitHub Packages. The `@taflex/web` package re-exports everything
+from `@taflex/core`, so no separate core install is needed.
 
 ## Prerequisites
 

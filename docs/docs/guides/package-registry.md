@@ -190,7 +190,7 @@ This approach was chosen because:
 
 ### Internal Dependency Resolution
 
-Inside the monorepo, internal dependencies use `"*"` (workspace protocol). During publish, npm resolves this to the actual current version. The Changesets setting `updateInternalDependencies: "patch"` ensures that when `@taflex/core` is bumped, every package that depends on it has its dependency range updated automatically.
+Inside the monorepo, internal dependencies use **tilde ranges** (e.g., `"~1.0.0"`). During local development, npm workspaces resolve these to the local workspace copy. When published, the tilde range is included as-is, giving consumers a concrete version constraint. The Changesets setting `updateInternalDependencies: "patch"` ensures that when `@taflex/core` is bumped, every package that depends on it has its dependency range updated automatically.
 
 ### How to Add a Changeset
 

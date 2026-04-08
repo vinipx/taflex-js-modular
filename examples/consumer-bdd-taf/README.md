@@ -1,8 +1,9 @@
 # Consumer BDD TAF — TAFLEX Example
 
-Sample project demonstrating how to consume `@taflex/core`, `@taflex/bdd`,
-and `@taflex/web` packages from the GitHub Packages for
-Behavior-Driven Development (BDD) testing with Gherkin feature files.
+Sample project demonstrating how to consume `@taflex/bdd`
+and `@taflex/web` from GitHub Packages for Behavior-Driven Development
+(BDD) testing with Gherkin feature files. Both packages re-export
+everything from `@taflex/core`, so no separate core install is needed.
 
 Uses [Playwright](https://playwright.dev) as the browser engine and
 [playwright-bdd](https://github.com/nicolo-ribaudo/playwright-bdd) for
@@ -26,7 +27,7 @@ Gherkin/Cucumber-style step definitions.
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
 
-Open `.npmrc` and replace `280633` with the actual TAFLEX project ID
+> The `.npmrc` file is already configured to resolve `@taflex/*` packages from GitHub Packages — no additional setup needed.
 
 ### 2. Install dependencies
 

@@ -101,44 +101,26 @@ The `.npmrc` file with `@taflex:registry=https://npm.pkg.github.com` is the sing
 
 ## How Internal Dependencies Are Published
 
-### The `"*"` Specifier
+### Tilde Range Specifiers
 
-Inside the monorepo, packages that depend on `@taflex/core` use the wildcard version specifier:
-
-```json
-{
-  "dependencies": {
-    "@taflex/core": "*"
-  }
-}
-```
-
-During local development, npm workspaces resolve `"*"` to the local workspace copy of `@taflex/core`. However, when `npm publish` creates the tarball, the `"*"` is published **as-is** — npm does not rewrite plain `"*"` to an actual version number.
-
-This means consumers installing `@taflex/web` will see `"@taflex/core": "*"` in the resolved dependency tree, which npm resolves to the `latest` version on the registry.
-
-### Why This Works (With Fixed Versioning)
-
-Because all 8 packages are in a **fixed version group** (see [Versioning Strategy](#versioning-strategy)), they are always published simultaneously at the same version. When a consumer installs `@taflex/web@1.2.0`, the `"*"` dependency resolves to `@taflex/core@1.2.0` (since that's the latest available). The fixed group ensures compatibility.
-
-### The `workspace:` Protocol (Recommended Improvement)
-
-A more robust approach is to use npm's `workspace:` protocol instead of `"*"`:
+Inside the monorepo, packages that depend on `@taflex/core` use **tilde range** version specifiers:
 
 ```json
 {
   "dependencies": {
-    "@taflex/core": "workspace:^"
+    "@taflex/core": "~1.0.0"
   }
 }
 ```
 
-Unlike `"*"`, the `workspace:` protocol **is** rewritten by npm during publish:
-- `"workspace:*"` → `"1.2.0"` (exact version)
-- `"workspace:^"` → `"^1.2.0"` (caret range)
-- `"workspace:~"` → `"~1.2.0"` (tilde range)
+During local development, npm workspaces resolve this to the local workspace copy of `@taflex/core`. When `npm publish` creates the tarball, the tilde range is published as-is — consumers installing `@taflex/web` will see `"@taflex/core": "~1.0.0"` in the resolved dependency tree.
 
-This gives consumers a concrete version range instead of a wildcard, providing better protection against accidental breaking upgrades. This is the recommended approach for future releases.
+### Why Tilde Ranges Work Well
+
+The tilde range (`~1.0.0`) allows patch updates (e.g., `1.0.1`, `1.0.2`) but not minor or major bumps. Combined with **fixed versioning** (see [Versioning Strategy](#versioning-strategy)), this provides two layers of safety:
+
+1. **Fixed group** — all 8 packages are always published simultaneously at the same version, so `@taflex/web@1.2.0` and `@taflex/core@1.2.0` are guaranteed to be compatible.
+2. **Tilde constraint** — consumers get a concrete version range instead of a wildcard, preventing accidental breaking upgrades if packages were ever installed individually at different times.
 
 ---
 
@@ -180,8 +162,7 @@ TAFLEX uses the **fixed** versioning strategy via [Changesets](https://github.co
 The changesets configuration includes `"updateInternalDependencies": "patch"`. This setting controls what happens when an internal dependency (like `@taflex/core`) gets a version bump:
 
 - If `@taflex/core` bumps, all packages that depend on it also receive at least a patch bump
-- With the current `"*"` specifier, the wildcard already matches any version, so the specifier itself is not rewritten
-- If migrated to `"workspace:^"`, changesets would produce concrete ranges like `"^1.2.0"` in the published packages — giving consumers explicit version constraints
+- With tilde ranges (e.g., `"~1.0.0"`), changesets updates the range to match the new version (e.g., `"~1.2.0"`), giving consumers explicit version constraints in the published packages
 
 ### Release Workflow
 

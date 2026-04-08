@@ -1,7 +1,8 @@
 # Consumer API TAF — TAFLEX Example
 
-Sample project demonstrating how to consume `@taflex/core` and `@taflex/api`
-packages from the GitHub Packages for API testing.
+Sample project demonstrating how to consume `@taflex/api`
+from GitHub Packages for API testing. The `@taflex/api` package
+re-exports everything from `@taflex/core`, so no separate core install is needed.
 
 Uses [JSONPlaceholder](https://jsonplaceholder.typicode.com) as a public API
 to demonstrate GET, POST, PUT, PATCH, DELETE, and error handling.
@@ -24,7 +25,7 @@ to demonstrate GET, POST, PUT, PATCH, DELETE, and error handling.
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
 
-Open `.npmrc` and replace `280633` with the actual TAFLEX project ID
+> The `.npmrc` file is already configured to resolve `@taflex/*` packages from GitHub Packages — no additional setup needed.
 
 ### 2. Install dependencies
 

@@ -1,7 +1,8 @@
 # Consumer Mobile TAF — TAFLEX Example
 
-Sample project demonstrating how to consume `@taflex/core` and `@taflex/mobile`
-packages from the GitHub Packages for mobile testing.
+Sample project demonstrating how to consume `@taflex/mobile`
+from GitHub Packages for mobile testing. The `@taflex/mobile` package
+re-exports everything from `@taflex/core`, so no separate core install is needed.
 
 Uses [WebdriverIO](https://webdriver.io) with [Appium](https://appium.io) for
 mobile automation, supporting both local emulators and cloud platforms
@@ -27,7 +28,7 @@ mobile automation, supporting both local emulators and cloud platforms
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
 
-Open `.npmrc` and replace `280633` with the actual TAFLEX project ID
+> The `.npmrc` file is already configured to resolve `@taflex/*` packages from GitHub Packages — no additional setup needed.
 
 ### 2. Install dependencies
 

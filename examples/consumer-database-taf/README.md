@@ -26,7 +26,7 @@ setup, validation, and teardown.
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
 
-Open `.npmrc` and replace `280633` with the actual TAFLEX project ID
+> The `.npmrc` file is already configured to resolve `@taflex/*` packages from GitHub Packages — no additional setup needed.
 
 ### 2. Install dependencies
 

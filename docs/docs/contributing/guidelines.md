@@ -6,7 +6,7 @@ Thank you for your interest in contributing to TAFLEX JS!
 
 1. Clone the repository and install dependencies:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/vinipx/taflex-js-modular.git
    cd taflex-js-modular
    npm install
    ```
