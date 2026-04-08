@@ -1,0 +1,13 @@
+# TAFLEX JS Modular — Code Ownership Rules
+#
+# The main codeowner is responsible for approving all changes.
+# Update the user/group path below to match your GitHub structure.
+#
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default: main owner owns everything
+* @Vinicius_Fagundes
+
+# Per-package ownership (uncomment and adjust to delegate review to specific teams)
+# packages/reporters/ @Vinicius_Fagundes @taflex/reporting-team
+# packages/mobile/    @Vinicius_Fagundes @taflex/mobile-team

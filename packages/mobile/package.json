@@ -1,0 +1,29 @@
+{
+  "name": "@taflex/mobile",
+  "version": "1.0.0",
+  "description": "WebdriverIO-based mobile automation strategy for TAFLEX JS",
+  "main": "index.js",
+  "type": "module",
+  "files": [
+    "src",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": [
+    "taflex",
+    "test-automation",
+    "mobile",
+    "webdriverio"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webdriverio": "^8.21.0",
+    "@taflex/core": "~1.0.0"
+  },
+  "peerDependencies": {
+    "webdriverio": "^8.21.0"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@taflex/core",
+  "version": "1.0.0",
+  "description": "Core abstractions, config management, driver registry, and logging for TAFLEX JS",
+  "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./setup/vitest": "./src/setup/vitest.setup.js",
+    "./setup/playwright-reporter": "./src/setup/playwright.reporter.js"
+  },
+  "files": [
+    "src",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": [
+    "taflex",
+    "test-automation",
+    "core",
+    "driver-registry"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "zod": "^4.3.6",
+    "pino": "^9.0.0",
+    "pino-pretty": "^11.0.0"
+  },
+  "peerDependencies": {
+    "vitest": "^4.0.0"
+  }
+}

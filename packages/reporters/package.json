@@ -1,0 +1,31 @@
+{
+  "name": "@taflex/reporters",
+  "version": "1.0.0",
+  "description": "Enterprise reporting integrations (Allure, ReportPortal, Jira Xray) for TAFLEX JS",
+  "main": "index.js",
+  "type": "module",
+  "files": [
+    "src",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": [
+    "taflex",
+    "test-automation",
+    "reporters",
+    "allure",
+    "reportportal",
+    "xray"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "@playwright/test": "^1.40.0",
+    "@taflex/core": "~1.0.0",
+    "@reportportal/agent-js-playwright": "^5.0.0",
+    "allure-js-commons": "^2.15.0"
+  }
+}

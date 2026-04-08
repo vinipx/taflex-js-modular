@@ -1,0 +1,13 @@
+{
+  "name": "consumer-api-taf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sample project demonstrating how to consume @taflex/api for API testing",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@taflex/api": "~1.0.0"
+  }
+}

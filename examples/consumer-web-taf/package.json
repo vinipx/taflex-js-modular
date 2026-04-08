@@ -1,0 +1,14 @@
+{
+  "name": "consumer-web-taf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sample project demonstrating how to consume @taflex packages from GitHub Packages",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed"
+  },
+  "dependencies": {
+    "@taflex/web": "~1.0.0"
+  }
+}

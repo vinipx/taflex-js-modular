@@ -1,0 +1,15 @@
+{
+  "name": "consumer-bdd-taf",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sample project demonstrating how to consume @taflex/bdd for BDD testing with Gherkin",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed"
+  },
+  "dependencies": {
+    "@taflex/bdd": "~1.0.0",
+    "@taflex/web": "~1.0.0"
+  }
+}

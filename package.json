@@ -1,0 +1,42 @@
+{
+  "name": "taflex-js-modular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish",
+    "publish:dry": "npm publish --dry-run --workspaces",
+    "publish:local": "npm publish --workspaces"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinipx/taflex-js-modular.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinipx/taflex-js-modular/issues"
+  },
+  "homepage": "https://github.com/vinipx/taflex-js-modular",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": "true",
+  "devDependencies": {
+    "@changesets/cli": "^2.30.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^17.4.0",
+    "prettier": "^3.8.1",
+    "vitest": "^4.1.0"
+  }
+}

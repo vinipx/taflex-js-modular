@@ -1,0 +1,22 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.3/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [
+    [
+      "@taflex/core",
+      "@taflex/web",
+      "@taflex/api",
+      "@taflex/mobile",
+      "@taflex/bdd",
+      "@taflex/database",
+      "@taflex/reporters",
+      "@taflex/contracts"
+    ]
+  ],
+  "linked": [],
+  "access": "restricted",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": []
+}
