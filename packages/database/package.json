@@ -20,6 +20,9 @@
   ],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "pg": "^8.11.0",
     "mysql2": "^3.6.0"

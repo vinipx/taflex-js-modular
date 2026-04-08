@@ -17,6 +17,9 @@
   ],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "@playwright/test": "^1.40.0",
     "playwright-bdd": "^6.0.0",

@@ -19,6 +19,9 @@
   ],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "@pact-foundation/pact": "^13.0.0",
     "axios": "^1.6.0",

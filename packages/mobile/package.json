@@ -19,6 +19,9 @@
   ],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "webdriverio": "^8.21.0",
     "@taflex/core": "~1.0.0"

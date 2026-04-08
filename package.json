@@ -28,7 +28,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "private": "true",
+  "private": true,
   "devDependencies": {
     "@changesets/cli": "^2.30.0",
     "@eslint/js": "^10.0.1",

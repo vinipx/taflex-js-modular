@@ -24,6 +24,9 @@
   ],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "dependencies": {
     "dotenv": "^17.3.1",
     "zod": "^4.3.6",
